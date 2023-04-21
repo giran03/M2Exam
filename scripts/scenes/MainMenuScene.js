@@ -7,6 +7,8 @@ class MainMenuScene extends Phaser.Scene
         // MAPS, TILESET, LAYER
         this.terrainMap
         this.terrainTileSet
+        
+        this.gameScene = 'GameSceneLevel1' // scene to start for play button
     }
     
     create() {
@@ -17,7 +19,6 @@ class MainMenuScene extends Phaser.Scene
         const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
 
         // AUDIO
-        this.sound.pauseOnBlur = false
         this.sound.play( 'bgMusic', {
             loop: true,
             volume: .7
@@ -150,7 +151,7 @@ class MainMenuScene extends Phaser.Scene
         this.playBtn.on("pointerup", ()=>{
             playText.y -= 3
             this.time.delayedCall(50, () => {
-                this.scene.start("GameScene")
+                this.scene.start(this.gameScene)
             })
         })
 

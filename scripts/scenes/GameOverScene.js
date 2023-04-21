@@ -3,14 +3,42 @@ class GameOverScene extends Phaser.Scene
     constructor() 
     { 
         super('GameOverScene')
+
+        this.GameScene = 'GameSceneLevel1'
+        this.score
+        this.heart
     }
 
     create() {
         // INIT
-        this.scene.stop('OverlayScene')
+        this.scene.stop('DungeonRoomLevel2')
+        this.scene.stop('OverlaySceneLevel1')
+        this.scene.stop('OverlaySceneLevel2')
+        this.scene.stop('OverlaySceneLevel3')
         this.sound.pauseAll()
         const screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
         const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
+
+        const level3 = this.scene.get('GameSceneLevel3').data.get('score')
+        const dungeonData = this.scene.get('DungeonRoomLevel2').data.get('score')
+        const level2 = this.scene.get('GameSceneLevel2').data.get('score')
+        if(level3 != null) {
+            this.score = this.scene.get('GameSceneLevel3').data.get('score')
+            this.heart = this.scene.get('GameSceneLevel3').data.get('heart')
+            console.log('GETTING THE SCORE FROM GAMESCENE LEVEL 3')
+        } else if (dungeonData != null) {
+            this.score = this.scene.get('DungeonRoomLevel2').data.get('score')
+            this.heart = this.scene.get('DungeonRoomLevel2').data.get('heart')
+            console.log('GETTING THE SCORE FROM GAMESCENE DungeonRoomLevel2')
+        } else if (level2 != null) {
+            this.score = this.scene.get('GameSceneLevel2').data.get('score')
+            this.heart = this.scene.get('GameSceneLevel2').data.get('heart')
+            console.log('GETTING THE SCORE FROM GAMESCENE LEVEL 2')
+        } else {
+            this.score = this.scene.get('GameSceneLevel1').data.get('score')
+            this.heart = this.scene.get('GameSceneLevel1').data.get('heart')
+            console.log('GETTING THE SCORE FROM GAMESCENE LEVEL 1')
+        }
 
         // AUDIO
         this.sound.play('gOverSFX')
@@ -64,7 +92,7 @@ class GameOverScene extends Phaser.Scene
 
         // GAME PLAYER SCORE TEXT
         const playerScore = this.add.text(2000, screenCenterY*.73,
-            `Score: ${this.scene.get('GameScene').data.get('score')}  `,
+            `Score: ${this.score}  `,
             { 
                 fill: '#fff' , fontSize: '30px', fontFamily: 'stackedPixel'
             }).setOrigin(.5).setShadow(2, 2, '#000', 5, true, true)
@@ -77,7 +105,7 @@ class GameOverScene extends Phaser.Scene
             ease: 'Bounce.easeInOut'
         })
         const playerHearts = this.add.text(2000, screenCenterY*.9,
-            `Heart: ${this.scene.get('GameScene').data.get('heart')}  `,
+            `Heart: ${this.heart}  `,
             { 
                 fill: '#fff' , fontSize: '30px', fontFamily: 'stackedPixel'
             }).setOrigin(.5).setShadow(2, 2, '#000', 5, true, true)
@@ -119,7 +147,7 @@ class GameOverScene extends Phaser.Scene
         restartBtn.on("pointerup", ()=>{
             restartText.y -= 3
             this.time.delayedCall(50, () => {
-                this.scene.start("GameScene")
+                this.scene.start(this.GameScene)
             })
         })
 

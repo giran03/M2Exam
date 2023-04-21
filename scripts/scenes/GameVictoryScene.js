@@ -6,19 +6,20 @@ class GameVictoryScene extends Phaser.Scene
         // MAPS, TILESET, LAYER
         this.terrainMap
         this.terrainTileSet
+
+        this.GameScene = 'GameSceneLevel3'
     }
 
     create() {
         // AUDIO
+        this.scene.stop('DungeonRoomLevel2')
+        this.scene.stop('OverlaySceneLevel1')
+        this.scene.stop('OverlaySceneLevel2')
+        this.scene.stop('OverlaySceneLevel3')
         this.sound.pauseAll()
-        this.sound.play('winSFX',{
-            volume: .8
-        })
-
+        this.sound.play('winSFX',{ volume: .8 })
         const screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
         const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
-
-        this.scene.stop('OverlayScene')
 
         // 🗺️ TILE MAPS, SETS, LAYERS 🗺️
         this.terrainMap = this.make.tilemap({ key: 'terrainMap', tileHeight: 16, tileWidth: 16})
@@ -70,7 +71,7 @@ class GameVictoryScene extends Phaser.Scene
 
         // GAME PLAYER SCORE TEXT
         const playerScore = this.add.text(2000, screenCenterY*.73,
-            `Score: ${this.scene.get('GameScene').data.get('score')}  `,
+            `Score: ${this.scene.get(this.GameScene).data.get('score')}  `,
             { 
                 fill: '#fff' , fontSize: '30px', fontFamily: 'stackedPixel'
             }).setOrigin(.5).setShadow(2, 2, '#000', 5, true, true)
@@ -83,7 +84,7 @@ class GameVictoryScene extends Phaser.Scene
             ease: 'Bounce.easeInOut'
         })
         const playerHearts = this.add.text(2000, screenCenterY*.9,
-            `Heart: ${this.scene.get('GameScene').data.get('heart')}  `,
+            `Heart: ${this.scene.get(this.GameScene).data.get('heart')}  `,
             { 
                 fill: '#fff' , fontSize: '30px', fontFamily: 'stackedPixel'
             }).setOrigin(.5).setShadow(2, 2, '#000', 5, true, true)
@@ -125,7 +126,7 @@ class GameVictoryScene extends Phaser.Scene
         restartBtn.on("pointerup", ()=>{
             restartText.y -= 3
             this.time.delayedCall(50, () => {
-                this.scene.start("GameScene")
+                this.scene.start('GameSceneLevel1')
             })
         })
 

@@ -12,7 +12,19 @@ var config = {
         limit: 120,
         forceSetTimeOut: true
     },
-    scene: [PreLoadScene,OverlayScene,MainMenuScene,CreditScene,GameScene,GameVictoryScene,GameOverScene],
+    scene: [PreLoadScene,
+            OverlaySceneLevel1,
+            OverlaySceneLevel2,
+            DungeonRoomOverlay,
+            OverlaySceneLevel3,
+            MainMenuScene,
+            CreditScene,
+            GameSceneLevel1,
+            GameSceneLevel2,
+            DungeonRoomLevel2,
+            GameSceneLevel3,
+            GameVictoryScene,
+            GameOverScene],
     render: {
         pixelArt: true
     }

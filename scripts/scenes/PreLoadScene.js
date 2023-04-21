@@ -7,10 +7,17 @@ class PreLoadScene extends Phaser.Scene
 
     preload() {
         // PHASER V3.60.0 IS USED IN THIS PROJECT
-
+        this.sound.pauseOnBlur = false
         // TILE MAPS
-        this.load.tilemapTiledJSON('terrainMap', './assets/maps/terrainMap.json')
-        this.load.image('terrainTiles', './assets/maps/terrainSet.png')
+        // ATLAS
+        this.load.image('terrainTiles', './assets/atlas/terrainSet.png')
+        // LEVEL 1
+        this.load.tilemapTiledJSON('terrainMap', './assets/maps/level1/terrainMap.json')
+        // LEVEL 2
+        this.load.tilemapTiledJSON('level2', './assets/maps/level2/secondLevel.json')
+        this.load.tilemapTiledJSON('dungeonRoomLevel2', './assets/maps/level2/subLevel.json')
+        // LEVEL 3
+        this.load.tilemapTiledJSON('level3', './assets/maps/level3/thirdLevel.json')
 
         // PLAYER
         this.load.spritesheet('baeIdle', './assets/player/Baelz_IdleAnim.png', { frameWidth: 150, frameHeight: 198 })
@@ -28,6 +35,9 @@ class PreLoadScene extends Phaser.Scene
 
         // AUDIO
         this.load.audio('bgMusic', './assets/audio/bgm.ogg')
+        this.load.audio('dungeonBGM', './assets/audio/dungeonBGM.ogg')
+        this.load.audio('lastBGM', './assets/audio/lastBGM.ogg')
+        this.load.audio('wooshSFX', './assets/audio/woosh.ogg')
         this.load.audio('winSFX', './assets/audio/victory.ogg')
         this.load.audio('gOverSFX', './assets/audio/defeat.ogg')
         this.load.audio('coinSFX', './assets/audio/coin.ogg')
