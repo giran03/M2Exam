@@ -1,2 +1,4 @@
-# M2Q3
- Submission for Module 2 Quiz 3 in Game Programming 1 | Simple Side-Scroller
+# M2|Exam
+ Submission for Module 2 Examination in Game Programming 1 | Simple Side-Scroller Platformer Game v2
+ # Changes
+ Added more levels
