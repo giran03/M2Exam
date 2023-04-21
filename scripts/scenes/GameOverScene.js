@@ -4,7 +4,7 @@ class GameOverScene extends Phaser.Scene
     { 
         super('GameOverScene')
 
-        this.GameScene = 'GameSceneLevel1'
+        this.GameScene
         this.score
         this.heart
     }
@@ -25,19 +25,19 @@ class GameOverScene extends Phaser.Scene
         if(level3 != null) {
             this.score = this.scene.get('GameSceneLevel3').data.get('score')
             this.heart = this.scene.get('GameSceneLevel3').data.get('heart')
-            console.log('GETTING THE SCORE FROM GAMESCENE LEVEL 3')
+            this.GameScene = 'GameSceneLevel3'
         } else if (dungeonData != null) {
             this.score = this.scene.get('DungeonRoomLevel2').data.get('score')
             this.heart = this.scene.get('DungeonRoomLevel2').data.get('heart')
-            console.log('GETTING THE SCORE FROM GAMESCENE DungeonRoomLevel2')
+            this.GameScene = 'DungeonRoomLevel2'
         } else if (level2 != null) {
             this.score = this.scene.get('GameSceneLevel2').data.get('score')
             this.heart = this.scene.get('GameSceneLevel2').data.get('heart')
-            console.log('GETTING THE SCORE FROM GAMESCENE LEVEL 2')
+            this.GameScene = 'GameSceneLevel2'
         } else {
             this.score = this.scene.get('GameSceneLevel1').data.get('score')
             this.heart = this.scene.get('GameSceneLevel1').data.get('heart')
-            console.log('GETTING THE SCORE FROM GAMESCENE LEVEL 1')
+            this.GameScene = 'GameSceneLevel1'
         }
 
         // AUDIO
@@ -147,7 +147,13 @@ class GameOverScene extends Phaser.Scene
         restartBtn.on("pointerup", ()=>{
             restartText.y -= 3
             this.time.delayedCall(50, () => {
-                this.scene.start(this.GameScene)
+                if(this.GameScene != 'GameSceneLevel1') {
+                    this.sound.play( 'bgMusic', {
+                        loop: true,
+                        volume: .7
+                    })
+                }
+                this.scene.start('GameSceneLevel1')
             })
         })
 

@@ -126,6 +126,10 @@ class GameVictoryScene extends Phaser.Scene
         restartBtn.on("pointerup", ()=>{
             restartText.y -= 3
             this.time.delayedCall(50, () => {
+                this.sound.play( 'bgMusic', {
+                    loop: true,
+                    volume: .7
+                })
                 this.scene.start('GameSceneLevel1')
             })
         })

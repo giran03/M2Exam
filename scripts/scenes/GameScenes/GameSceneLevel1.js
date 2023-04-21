@@ -47,6 +47,8 @@ class GameSceneLevel1 extends Phaser.Scene
     create() {
         // INIT
         this.sound.resumeAll()
+        this.sound.stopByKey('dungeonBGM')
+        this.sound.stopByKey('lastBGM')
         this.sound.stopByKey('winSFX')
         this.sound.stopByKey('playerHit')
         this.sound.stopByKey('waterSplash')
